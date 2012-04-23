@@ -42,6 +42,11 @@ package tco2002;
  * Class: Chooser Method: numSets Parameters: int[], int[], int[] Returns: int
  * Method signature: int numSets(int[] param0, int[] param1, int[] param2) (be
  * sure your method is public)
+ * 
+ * This problem statement is the exclusive and proprietary property of TopCoder,
+ * Inc. Any unauthorized use or reproduction of this information without the
+ * prior written consent of TopCoder, Inc. is strictly prohibited. (c)2010,
+ * TopCoder, Inc. All rights reserved.
  */
 public class Chooser {
 

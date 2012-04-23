@@ -75,13 +75,13 @@ package tco2002;
  * 
  * Definition
  * 
- * Class: Checker 
- * Method: CheckData 
- * Parameters: String[] 
- * Returns: boolean 
- * Method signature: boolean CheckData(String[] param0) (be sure your method is public)
+ * Class: Checker Method: CheckData Parameters: String[] Returns: boolean Method
+ * signature: boolean CheckData(String[] param0) (be sure your method is public)
  * 
- * @author eyamabd
+ * This problem statement is the exclusive and proprietary property of TopCoder,
+ * Inc. Any unauthorized use or reproduction of this information without the
+ * prior written consent of TopCoder, Inc. is strictly prohibited. (c)2010,
+ * TopCoder, Inc. All rights reserved.
  * 
  */
 public class Checker {
