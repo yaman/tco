@@ -85,5 +85,9 @@ package tco2002;
  * 
  */
 public class Checker {
+	
+	public boolean checkData(String[] param0){
+		return true;
+	}
 
 }
