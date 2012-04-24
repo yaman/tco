@@ -18,18 +18,31 @@ package tco2002;
  * as follows: "NAME1 LOVES NAME2" (quotes added for clarity only).
  * 
  * Checker will ensure the following: lovers will contain between 2 and 20
- * elements, inclusive. Each element of lovers will contain less than or equal
- * to 40 characters and will be formatted as "NAME1 LOVES NAME2" (quotes added
- * for clarity again) with the capital word LOVES and only one space between
- * words, and no leading or trailing spaces. NAME1 and NAME2 will be names of
- * non-zero length. NAME1 and NAME2 will not be identical (everyone loves
- * themselves anyway). NAME1 and NAME2 will contain only capital letters [A-Z]
- * and/or hyphens '-'. For each NAME2 there will be a corresponding NAME1 in
- * lovers. That is, everyone loves someone else in the problem.
+ * elements, inclusive.
  * 
- * Notes: One person may love multiple people (repeated NAME1 in different
- * elements) and one person may be loved by multiple people (repeated NAME2 in
- * different elements). It is possible for two elements to be identical. (ex
+ * Each element of lovers will contain less than or equal to 40 characters and
+ * will be formatted as "NAME1 LOVES NAME2" (quotes added for clarity again)
+ * with the capital word LOVES and
+ * 
+ * only one space between words, and no leading or trailing spaces.
+ * 
+ * NAME1 and NAME2 will be names of non-zero length.
+ * 
+ * NAME1 and NAME2 will not be identical (everyone loves themselves anyway).
+ * 
+ * NAME1 and NAME2 will contain only capital letters [A-Z] and/or hyphens '-'.
+ * 
+ * For each NAME2 there will be a corresponding NAME1 in lovers.
+ * 
+ * That is, everyone loves someone else in the problem.
+ * 
+ * Notes:
+ * 
+ * One person may love multiple people (repeated NAME1 in different elements)
+ * and one person may be loved by multiple people (repeated NAME2 in different
+ * elements).
+ * 
+ * It is possible for two elements to be identical. (ex
  * {"A LOVES B","A LOVES B","B LOVES A"} is valid). END PSUEDO-PROBLEM STATEMENT
  * ******
  * 
@@ -85,9 +98,24 @@ package tco2002;
  * 
  */
 public class Checker {
-	
-	public boolean checkData(String[] param0){
-		return true;
+
+	public boolean checkData(String[] param0) {
+
+		String loves = "LOVES";
+
+		int length = param0.length;
+
+		if (length < 2 || length > 20) {
+			return false;
+		}
+
+		for (String lover : param0) {
+			if (lover.length() > 40 && lover.length() < 9) {
+				return false;
+			}
+		}
+
+		return false;
 	}
 
 }
