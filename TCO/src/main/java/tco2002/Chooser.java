@@ -50,18 +50,49 @@ package tco2002;
  */
 public class Chooser {
 
-	public int numSets(int[] easy, int[] medium, int[] hard) {
+	public int numSets(int[] easy, int[] medium, int[] hard)
+			throws InterruptedException {
 		int result = 0;
 
 		for (int easyIndex = 0; easyIndex < easy.length; easyIndex++) {
 			for (int mediumIndex = 0; mediumIndex < medium.length; mediumIndex++) {
 				for (int hardIndex = 0; hardIndex < hard.length; hardIndex++) {
+					System.out.println();
+					System.out.print("Easy:" + easy[easyIndex]);
+					System.out.print("	Medium:" + medium[mediumIndex]);
+					System.out.print("	Hard:" + hard[hardIndex]);
 
+					int easyI = easy[easyIndex];
+					int mediumI = medium[mediumIndex];
+					int hardI = hard[hardIndex];
+					int weight = easyI + mediumI + hardI;
+					System.out.print("	Weight:" + weight);
+					if (weight >= 60 && weight <= 75) {
+						result++;
+					}
+					Thread.sleep(100);
 				}
 			}
 
 		}
-
+		System.out.println();
 		return result;
+	}
+
+	public static void main(String[] args) {
+		int easy[] = { 5, 5, 5 };
+		int medium[] = { 15, 15,15 };
+		int hard[] = { 45, 45,35 };
+
+		Chooser chooser = new Chooser();
+		int combination = 0;
+		try {
+			combination = chooser.numSets(easy, medium, hard);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("Combination : " + combination);
+
 	}
 }
