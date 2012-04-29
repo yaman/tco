@@ -99,23 +99,123 @@ package tco2002;
  */
 public class Checker {
 
+	private final String loves = "LOVES";
+
 	public boolean checkData(String[] param0) {
 
-		String loves = "LOVES";
+		if (!checkArrayLength(param0)) {
+			return false;
+		}
+		for (String lover : param0) {
+			if (!checkSpaces(lover)) {
+				return false;
+			}
+			if (!checkLength(lover)) {
+				return false;
+			}
+			if (!checkHasLoves(lover)) {
+				return false;
+			}
+			if (!checkZeroLength(lover)) {
+				return false;
+			}
+			if (!checkIdenticalNames(lover)) {
+				return false;
+			}
+			if (!checkNamesConvention(lover)) {
+				return false;
+			}
 
-		int length = param0.length;
+		}
+
+		return true;
+	}
+
+	public boolean checkNamesConvention(String lover) {
+		String[] loverWords = lover.split(" ");
+		String firstName = loverWords[0];
+		String secondName = loverWords[2];
+
+		if (!firstName.matches("(A-Z)+")) {
+			System.out.println("firstname:"+firstName);
+			return false;
+		}
+		if (!secondName.matches("A-Z")) {
+			System.out.println("secondname");
+			return false;
+		}
+		return true;
+	}
+
+	public boolean checkIdenticalNames(String lover) {
+		String[] loverWords = lover.split(" ");
+		String firstName = loverWords[0];
+		String secondName = loverWords[2];
+
+		if (firstName.equals(secondName)) {
+			return false;
+		}
+		return true;
+	}
+
+	public boolean checkZeroLength(String lover) {
+		String[] loverWords = lover.split(" ");
+
+		boolean zeroLength = false;
+		if (loverWords.length == 3) {
+			zeroLength = true;
+		}
+
+		return zeroLength;
+	}
+
+	public boolean checkArrayLength(String[] array) {
+		int length = array.length;
 
 		if (length < 2 || length > 20) {
 			return false;
 		}
+		return true;
+	}
 
-		for (String lover : param0) {
-			if (lover.length() > 40 && lover.length() < 9) {
-				return false;
-			}
+	public boolean checkSpaces(String lover) {
+		char[] loverChar = lover.toCharArray();
+		int spaceCount = 0;
+		for (char c : loverChar) {
+			if (c == ' ')
+				spaceCount++;
+		}
+		if (spaceCount > 2) {
+			return false;
+		}
+		if (lover.startsWith(" ")) {
+			return false;
+		}
+		if (lover.endsWith(" ")) {
+			return false;
 		}
 
-		return false;
+		return true;
+	}
+
+	public boolean checkLength(String lover) {
+		if (lover.length() > 40) {
+			return false;
+		}
+		return true;
+	}
+
+	public boolean checkHasLoves(String lover) {
+		String[] loverWords = lover.split(" ");
+
+		boolean hasLoves = false;
+
+		for (String word : loverWords) {
+			if (word.equals(loves)) {
+				hasLoves = true;
+			}
+		}
+		return hasLoves;
 	}
 
 }
