@@ -1,5 +1,10 @@
 package tco2002;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * Problem Statement
  * 
@@ -103,9 +108,11 @@ public class Checker {
 
 	public boolean checkData(String[] param0) {
 
+		boolean result = true;
 		if (!checkArrayLength(param0)) {
 			return false;
 		}
+		Map<String, String> nameMap = new HashMap<String, String>();
 		for (String lover : param0) {
 			if (!checkSpaces(lover)) {
 				return false;
@@ -126,22 +133,37 @@ public class Checker {
 				return false;
 			}
 
+			String[] loverArray = lover.split(" ");
+			String name1 = loverArray[0];
+			String name2 = loverArray[2];
+
+			nameMap.put(name1 + 1, name1);
+			nameMap.put(name2 + 2, name2);
+
 		}
 
-		return true;
+		for (String name : nameMap.values()) {
+			String name1 = nameMap.get(name + 1);
+			String name2 = nameMap.get(name + 2);
+			if (null == name1 && null != name2) {
+				return false;
+			}
+		}
+		return result;
 	}
 
 	public boolean checkNamesConvention(String lover) {
 		String[] loverWords = lover.split(" ");
 		String firstName = loverWords[0];
 		String secondName = loverWords[2];
-
-		if (!firstName.matches("(A-Z)+")) {
-			System.out.println("firstname:"+firstName);
+		final String patternStr = "[A-Z-]+";
+		final Pattern p = Pattern.compile(patternStr);
+		Matcher m = p.matcher(firstName);
+		if (!m.matches()) {
 			return false;
 		}
-		if (!secondName.matches("A-Z")) {
-			System.out.println("secondname");
+		m = p.matcher(secondName);
+		if (!m.matches()) {
 			return false;
 		}
 		return true;
