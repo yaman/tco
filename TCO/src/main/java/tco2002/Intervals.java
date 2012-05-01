@@ -65,6 +65,6 @@ package tco2002;
  */
 public class Intervals {
 	public String[] partition(String[] param0){
-		
+		return null;
 	}
 }
