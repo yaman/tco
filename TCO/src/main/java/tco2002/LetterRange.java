@@ -68,38 +68,31 @@ public class LetterRange {
 		char[] textArray = text.toCharArray();
 		QuickSort.sort(textArray, 0, textArray.length - 1);
 		textArray = String.valueOf(textArray).trim().toCharArray();
-		textArray = removeDuplicate(textArray);
-		System.out.println("TextArray :" + String.valueOf(textArray));
+		textArray = removeDuplicate(textArray); 
 		String result = "";
 
 		for (int i = 0; i < textArray.length; i++) {
 
 			char start = textArray[i];
 			char tmp = start;
-			System.out.println("start:" + start);
+			// System.out.println("start:" + start);
 			int charIndex = 0;
-			do {
+			while (i < textArray.length && tmp == textArray[i]) {
 				i++;
 				tmp++;
 				charIndex++;
-			} while (tmp == textArray[i] && i < textArray.length);
-
-			System.out.println("end:" + ((char) (tmp - 1)));
+			} 
 
 			if (start == tmp - 1) {
 				String add = start + ":" + start;
-				System.out.println("add : " + add);
 				if (result.length() == 0) {
 					result = add;
 				} else {
 					result = result + "," + add;
 				}
-			}
-
-			if (start + charIndex == tmp) {
+			} else if (start + charIndex == tmp) {
 				tmp = (char) (tmp - 1);
 				String add = start + ":" + tmp;
-				System.out.println("add : " + add);
 				if (result.length() == 0) {
 					result = add;
 				} else {
@@ -107,8 +100,7 @@ public class LetterRange {
 				}
 			}
 			i--;
-		}
-		System.out.println("result : " + result);
+		} 
 		return result.split(",");
 
 	}
@@ -118,31 +110,27 @@ public class LetterRange {
 	}
 
 	public char[] removeDuplicate(char[] array) {
-		System.out.println("TextArray :" + String.valueOf(array));
 		char[] tmpArray = new char[array.length];
 		char tmp = array[0];
 		tmpArray[0] = tmp;
 
 		int duplicateCount = 0;
+		int tmpArrayIndex = 1;
 		for (int i = 1; i < array.length; i++) {
-			System.out.print("Tmp :" + tmp);
-			System.out.println("  Array[i]:" + array[i]);
 			if (tmp != array[i]) {
-				tmpArray[i] = array[i];
+				tmpArray[tmpArrayIndex] = array[i];
+				tmpArrayIndex++;
 
 			} else {
 				duplicateCount++;
 			}
 			tmp = array[i];
 		}
-		System.out.println("Duplicate Count : "+duplicateCount);
-
 		char[] resultingArray = new char[array.length - duplicateCount];
 
 		for (int i = 0; i < array.length - duplicateCount; i++) {
 			resultingArray[i] = tmpArray[i];
 		}
-		System.out.println("ResultingArray: " + String.valueOf(resultingArray));
 		return resultingArray;
 	}
 }

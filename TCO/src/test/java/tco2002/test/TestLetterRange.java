@@ -8,6 +8,16 @@ import tco2002.LetterRange;
 public class TestLetterRange {
 
 	@Test
+	public void testDuplicate() {
+		String testStr = "abbccdeff";
+		LetterRange range = new LetterRange(); 
+		char[] testArray = testStr.toCharArray();
+		char[] expectedArray = { 'a', 'b', 'c', 'd', 'e', 'f' }; 
+		char[] actualArray = range.removeDuplicate(testArray);
+		Assert.assertArrayEquals(expectedArray, actualArray);
+	}
+
+	@Test
 	public void testLowerCase() {
 		String text = "abcZ-";
 		LetterRange letterRange = new LetterRange();
@@ -23,7 +33,6 @@ public class TestLetterRange {
 		String[] expected = { "a:c" };
 		Assert.assertArrayEquals(expected, actual);
 	}
- 
 	@Test
 	public void testSuccess2() {
 		String text = "fb xee ac";
@@ -32,7 +41,7 @@ public class TestLetterRange {
 		String[] expected = { "a:c", "e:f", "x:x" };
 		Assert.assertArrayEquals(expected, actual);
 	}
- 
+	@Test
 	public void testSuccess3() {
 		String text = "aha";
 		LetterRange letterRange = new LetterRange();
@@ -40,7 +49,7 @@ public class TestLetterRange {
 		String[] expected = { "a:a", "h:h" };
 		Assert.assertArrayEquals(expected, actual);
 	}
- 
+	@Test
 	public void testSuccess4() {
 		String text = "xyzzy";
 		LetterRange letterRange = new LetterRange();
@@ -48,7 +57,7 @@ public class TestLetterRange {
 		String[] expected = { "x:z" };
 		Assert.assertArrayEquals(expected, actual);
 	}
- 
+	@Test
 	public void testSuccess5() {
 		String text = "and toto too";
 		LetterRange letterRange = new LetterRange();
@@ -56,7 +65,7 @@ public class TestLetterRange {
 		String[] expected = { "a:a", "d:d", "n:o", "t:t" };
 		Assert.assertArrayEquals(expected, actual);
 	}
- 
+	@Test
 	public void testSuccess6() {
 		String text = "topcoder quiz";
 		LetterRange letterRange = new LetterRange();
@@ -64,7 +73,7 @@ public class TestLetterRange {
 		String[] expected = { "c:e", "i:i", "o:r", "t:u", "z:z" };
 		Assert.assertArrayEquals(expected, actual);
 	}
- 
+	@Test
 	public void testSuccess7() {
 		String text = "the quick brown fox jumps over the lazy dog";
 		LetterRange letterRange = new LetterRange();
