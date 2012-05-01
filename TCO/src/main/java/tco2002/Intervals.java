@@ -51,7 +51,7 @@ package tco2002;
  * not pairwise disjoint. By creating the new interval, "3:5", and removing the
  * elements 3, 4, and 5 from the two original intervals, the original intervals
  * are now correctly partitioned into the three intervals "1:2", "3:5", and
- * "6:8". Note that other partitionings are possible, such as {1:2,3:4,5:5,6:8}
+ * "6:8". Note that other partitioning are possible, such as {1:2,3:4,5:5,6:8}
  * which uses four intervals, but the minimum number of partitions must be used.
  * A partitioning such as {1:2,3:6,7:8} is incorrect because the interval "1:5"
  * from the original input cannot be formed by combining one or more of the
@@ -64,7 +64,17 @@ package tco2002;
  * {1:2,3:5,6:10,11:99}
  */
 public class Intervals {
-	public String[] partition(String[] param0){
-		return null;
+	public String[] partition(String[] param0) {
+		String[] result = {};
+		if(null == param0){
+			return result;
+		}
+		if (param0.length == 0) {
+			return result;
+		}
+		
+		
+		
+		return result;
 	}
 }
