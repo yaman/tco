@@ -58,23 +58,68 @@ package tco2002;
  * result intervals. Thus, the only correct solution is the list of intervals
  * {1:2,3:5,6:8}.
  * 
- * E2: {} ==> {} E3: {0:9999} ==> {0:9999} E4: {10:21,10:21} ==> {10:21} E5:
- * {6:10,3:10} ==> {3:5,6:10} E6: {1:10,3:5} ==> {1:2,3:5,6:10} E7:
- * {6:7,1:8,2:4,5:7,2:3} ==> {1:1,2:3,4:4,5:5,6:7,8:8} E8: {1:99,6:10,3:10} ==>
- * {1:2,3:5,6:10,11:99}
+ * E2: {} ==> {} 
+ * E3: {0:9999} ==>              {0:9999} 
+ * E4: {10:21,10:21} ==>         {10:21} 
+ * E5: {6:10,3:10} ==>           {3:5,6:10} 
+ * E6: {1:10,3:5} ==>            {1:2,3:5,6:10} 
+ * E7: {6:7,1:8,2:4,5:7,2:3} ==> {1:1,2:3,4:4,5:5,6:7,8:8} 
+ * 	   {1:2,
+ * E8: {1:99,6:10,3:10} ==>      {1:2,3:5,6:10,11:99}
  */
 public class Intervals {
 	public String[] partition(String[] param0) {
 		String[] result = {};
-		if(null == param0){
+		if (null == param0) {
 			return result;
 		}
 		if (param0.length == 0) {
 			return result;
 		}
+		if (param0.length > 20) {
+			return result;
+		}
+		if(!checkNumberFormat(param0)){
+			return result;
+		}
+		if(!checkNumberRange(param0)){
+			return result;
+		}
+		
+		
+		
+		
 		
 		
 		
 		return result;
+	}
+
+	public boolean checkNumberRange(String[] param0) { 
+		for (String interval : param0) {
+			String[] intervalParts = interval.split(":");
+			Integer first = Integer.parseInt(intervalParts[0]);
+			Integer second = Integer.parseInt(intervalParts[1]);
+			if (first < 0 || first > 9999 || second < 0 || second > 9999) {
+				return false;
+			}
+		}
+
+		return true;
+
+	}
+
+	public boolean checkNumberFormat(String[] param0) {
+		try {
+			for (String interval : param0) {
+				String[] intervalParts = interval.split(":");
+				Integer first = Integer.parseInt(intervalParts[0]);
+				Integer second = Integer.parseInt(intervalParts[1]);
+			}
+
+		} catch (NumberFormatException e) {
+			return false;
+		}
+		return true;
 	}
 }
