@@ -1,5 +1,8 @@
 package tco2002;
 
+import java.util.ArrayList;
+import java.util.StringTokenizer;
+
 /**
  * PROBLEM STATEMENT
  * 
@@ -9,7 +12,7 @@ package tco2002;
  * high number appears second, after the ':'. For example, the interval "1:3"
  * represents the set of integers 1, 2, and 3. (double quotes are for clarity).
  * The interval "100:199" represents the set of integers greater than or equal
- * to 100 and less than or equal to 199. The interval "5:5" respresents the set
+ * to 100 and less than or equal to 199. The interval "5:5" represents the set
  * containing the single integer 5. Note that the high value of the interval
  * must always be greater than or equal to the low value of the interval.
  * 
@@ -58,16 +61,13 @@ package tco2002;
  * result intervals. Thus, the only correct solution is the list of intervals
  * {1:2,3:5,6:8}.
  * 
- * E2: {} ==> {} 
- * E3: {0:9999} ==>              {0:9999} 
- * E4: {10:21,10:21} ==>         {10:21} 
- * E5: {6:10,3:10} ==>           {3:5,6:10} 
- * E6: {1:10,3:5} ==>            {1:2,3:5,6:10} 
- * E7: {6:7,1:8,2:4,5:7,2:3} ==> {1:1,2:3,4:4,5:5,6:7,8:8} 
- * 	   {1:2,
- * E8: {1:99,6:10,3:10} ==>      {1:2,3:5,6:10,11:99}
+ * E2: {} ==> {} E3: {0:9999} ==> {0:9999} E4: {10:21,10:21} ==> {10:21} E5:
+ * {6:10,3:10} ==> {3:5,6:10} E6: {1:10,3:5} ==> {1:2,3:5,6:10} E7:
+ * {6:7,1:8,2:4,5:7,2:3} ==> {1:1,2:3,4:4,5:5,6:7,8:8} {1:8,2:3,2:4,5:7,6:7}
+ * {1:8 E8: {1:99,6:10,3:10} ==> {1:2,3:5,6:10,11:99}
  */
 public class Intervals {
+
 	public String[] partition(String[] param0) {
 		String[] result = {};
 		if (null == param0) {
@@ -79,47 +79,75 @@ public class Intervals {
 		if (param0.length > 20) {
 			return result;
 		}
-		if(!checkNumberFormat(param0)){
-			return result;
-		}
-		if(!checkNumberRange(param0)){
-			return result;
-		}
-		
-		
-		
-		
-		
-		
-		
-		return result;
-	}
 
-	public boolean checkNumberRange(String[] param0) { 
-		for (String interval : param0) {
-			String[] intervalParts = interval.split(":");
-			Integer first = Integer.parseInt(intervalParts[0]);
-			Integer second = Integer.parseInt(intervalParts[1]);
-			if (first < 0 || first > 9999 || second < 0 || second > 9999) {
-				return false;
+		if (!checkNumberFormatAndRange(param0)) {
+			return result;
+		}
+
+		int used[] = new int[10000];
+		ArrayList<Integer> aa = new ArrayList<Integer>();
+		ArrayList<Integer> bb = new ArrayList<Integer>();
+		for (int x = 0; x < param0.length; x++) {
+			StringTokenizer st = new StringTokenizer(param0[x], ":", false);
+			int a = Integer.parseInt(st.nextToken());
+			int b = Integer.parseInt(st.nextToken());
+			if (!aa.contains(new Integer(a)))
+				aa.add(new Integer(a));
+			if (!bb.contains(new Integer(b)))
+				bb.add(new Integer(b));
+			for (int y = a; y <= b; y++) {
+				used[y]++;
 			}
 		}
+		ArrayList<String> al = new ArrayList<String>();
+		int x = 0;
+		int start = -1, end = -1;
+		while (x < 10000) {
+			while (x < 10000 && used[x] == 0)
+				x++;
+			if (x == 10000)
+				break;
+			if (used[x] >= 1) {
+				start = x;
+				while (!aa.contains(new Integer(x + 1))
+						&& !bb.contains(new Integer(x)))
+					x++;
+				// while (x < 10000 && used[x] == 1 && !aa.contains(new
+				// Integer(x))) x++;
+			}
+			end = x - 1;
+			String g = "" + start + ":" + (end + 1);
+			al.add(g);
+			x++;
+		}
+		String[] ret = new String[al.size()];
+		for (x = 0; x < al.size(); x++) {
+			ret[x] = (String) al.get(x);
+		}
 
-		return true;
-
+		System.out.println("result is");
+		for (String string : ret) {
+			System.out.println(string);
+		}
+		return ret;
 	}
 
-	public boolean checkNumberFormat(String[] param0) {
+	public boolean checkNumberFormatAndRange(String[] param0) {
 		try {
 			for (String interval : param0) {
 				String[] intervalParts = interval.split(":");
 				Integer first = Integer.parseInt(intervalParts[0]);
 				Integer second = Integer.parseInt(intervalParts[1]);
+				if (first < 0 || first > 9999 || second < 0 || second > 9999) {
+					return false;
+				}
 			}
-
 		} catch (NumberFormatException e) {
 			return false;
 		}
+
 		return true;
+
 	}
+
 }
