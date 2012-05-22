@@ -57,7 +57,8 @@ public class TestAlephNull {
 
 		Assert.assertArrayEquals(expected, alephNull.rational(generation, item));
 	}
- 
+
+	@Test
 	public void testSuccess5() {
 		int generation = 8;
 		int item = 70;
@@ -66,7 +67,8 @@ public class TestAlephNull {
 
 		Assert.assertArrayEquals(expected, alephNull.rational(generation, item));
 	}
- 
+
+	@Test
 	public void testSuccess6() {
 		int generation = 10;
 		int item = 467;
@@ -165,6 +167,7 @@ public class TestAlephNull {
 		Assert.assertArrayEquals(expected, alephNull.rational(generation, item));
 	}
 
+ 
 	public void testEdgeEnd() {
 		int generation = 30;
 		int item = 100;

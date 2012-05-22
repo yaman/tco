@@ -62,9 +62,9 @@ public class AlephNull {
 		if (item > 999999999 || item < 0)
 			return null;
 
-		int maxItem = (int) (Math.pow(2, generation - 1) + 1); 
-		if(item >=maxItem){
-			int[] re = {0,0};
+		int maxItem = (int) (Math.pow(2, generation - 1) + 1);
+		if (item >= maxItem) {
+			int[] re = { 0, 0 };
 			return re;
 		}
 
@@ -80,19 +80,20 @@ public class AlephNull {
 			genArray = generate(genArray);
 			genIndex++;
 		}
-		System.out.println("Generation/Item :"+generation +","+item);
+		System.out.println("Generation/Item :" + generation + "," + item);
 		System.out.println(genArray);
 		String genFound = genArray.get(item);
 		String[] genA = genFound.split("/");
 		result[0] = Integer.parseInt(genA[0]);
 		result[1] = Integer.parseInt(genA[1]);
-		System.out.println("output : " + result[0] + "," + result[1]);
+		System.out.println("output : " + result[0] + "," + result[1]); 
 		return result;
 	}
 
 	public ArrayList<String> generate(ArrayList<String> genArray) {
-		 
+	//	System.out.println("Input: " + genArray);
 		ArrayList<String> result = (ArrayList<String>) genArray.clone();
+		int resultIndex = 0;
 		for (int i = 0; i < genArray.size(); i++) {
 			String[] strArray = genArray.get(i).split("/");
 			int a1 = Integer.parseInt(strArray[0]);
@@ -102,10 +103,14 @@ public class AlephNull {
 			strArray = genArray.get(i + 1).split("/");
 			int a2 = Integer.parseInt(strArray[0]);
 			int b2 = Integer.parseInt(strArray[1]);
-			String newElement = "" + (a1 + a2) + "/" + (b1 + b2);
-			result.add(i + 1, newElement);
+			StringBuffer sb = new StringBuffer("");
+			sb.append((a1 + a2));
+			sb.append("/");
+			sb.append((b1+b2)); 
+			result.add(resultIndex + 1, sb.toString());
+			resultIndex += 2;
 		}
-
+		//System.out.println("output: " + result);
 		return result;
 	}
-}
+} 
