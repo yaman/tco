@@ -1,4 +1,4 @@
-package tco2002.utils;
+package tco.utils;
 
 public class QuickSort {
 

@@ -1,6 +1,6 @@
 package tco2002;
 
-import tco2002.utils.QuickSort;
+import tco.utils.QuickSort;
  
 
 /**
