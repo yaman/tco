@@ -1,20 +1,46 @@
 apply plugin: 'java'
 apply plugin: 'maven'
 
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        //Needed only for Pitest SNAPSHOT versions
+        //maven { url "http://oss.sonatype.org/content/repositories/snapshots/" }
+        //Needed to use a plugin JAR uploaded to GitHub (not available in a Maven repository)
+        add(new org.apache.ivy.plugins.resolver.URLResolver()) {
+            name = 'GitHub'
+            addArtifactPattern 'http://cloud.github.com/downloads/szpak/[module]/[module]-[revision].[ext]'
+        }
+    }
+    dependencies {
+        classpath 'info.solidsoft.gradle.pitest:gradle-pitest-plugin:0.29.0'
+        classpath "org.pitest:pitest:0.29"
+    }
+}
+
+apply plugin: "pitest"
+
 group = 'TCO'
 version = '0.0.1-SNAPSHOT'
-
-
 description = "TCO Solutions"
 
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
-
 repositories {
-    mavenCentral()
+    maven {
+        url "http://repo1.maven.org/maven2/"
+    }
 }
 dependencies {
-    compile group: 'junit', name: 'junit', version: '4.10'
-    testCompile 'junit:junit:4.10'
+    compile group: 'junit', name: 'junit', version: '4.11'
+    testCompile 'junit:junit:4.11'
+}
+
+pitest {
+    targetClasses = ['tco2001.*', 'tco2002.*']
+    threads = 4
+    outputFormats = ['XML', 'HTML']
+    jvmArgs = '-XX:-UseSplitVerifier'
 }
